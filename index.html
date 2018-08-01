@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <style>
+        .row{
+            width: 50%;
+            height: auto;
+            margin: auto auto;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+<div class="row" id="calendar"></div>
+
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/calendar.js"></script>
+<script>
+
+    var input={};
+    input.id="#calendar";   //配置
+    input.onSelect=function (data) {
+        alert(data.year+"-"+data.month+"-"+data.day);
+    };  //选中日期的回调
+    input.onChange=function (data) {
+        console.log("改变了，可以重新渲染额外html");
+    };  //当月份改变时回调，
+
+    var calen = lfCalendar(input); //生成日历视图
+
+
+    calen.renderDateCallback=function(data){
+        return abc();
+    };  //不是回调，直接暴露方法 ，设置日历其他信息
+    calen.refresh();  //设置信息是 要刷新，才能显示数据
+
+
+    function abc(){
+        var input={};
+        input.html="<strong>llf</strong>";
+        input.icon="";
+        input.style="color:red;";
+        $.ajax({
+            url:"",
+            type:"get",
+            async:false,
+            success:function () {
+                var d=new Date();
+                var v=d.getMinutes()+":"+d.getSeconds();
+                return v;
+            },
+            error:function(){
+
+            },
+        });
+        return input;
+
+    }
+
+</script>
+</body>
+</html>
